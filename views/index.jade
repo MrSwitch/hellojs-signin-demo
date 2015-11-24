@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+		title
+			= "HelloJS federated signin example"
+		script(src="//adodson.com/adorn/adorn.js", async)
+		script(src="components/hello/dist/hello.all.js")
+		script(src="script.js")
+		link(rel="stylesheet", href="//adodson.com/adorn/adorn.css")
+	body
+		include:markdown-it ../README.md
+
+		h2
+			= "Demo"
+
+		if connections && connections.google
+			p
+				= "Hello " + connections.google.displayName
+		else
+			div.google
+				button.login(onclick="login('google')")
+					= "Signin with Google"
+

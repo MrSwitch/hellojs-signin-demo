@@ -1,0 +1,20 @@
+{
+  "name": "hellojs-signin-demo",
+  "version": "0.0.0",
+  "description": "Demo of using HelloJS to sign the user in to a server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.0.0-alpha.2",
+    "express-session": "^1.12.1",
+    "jade": "*",
+    "jstransformer-markdown-it": "^0.2.2",
+    "oauth-shim": "^1.0.0",
+    "passport-google-oauth": "^0.2.0"
+  }
+}
