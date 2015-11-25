@@ -5,6 +5,8 @@ html
 			= "HelloJS federated signin example"
 		script(src="//adodson.com/adorn/adorn.js", async)
 		script(src="components/hello/dist/hello.all.js")
+		script(type='text/javascript').
+			var HELLO_CLIENT_IDS =!{JSON.stringify(client_ids)}
 		script(src="script.js")
 		link(rel="stylesheet", href="//adodson.com/adorn/adorn.css")
 	body
@@ -13,11 +15,12 @@ html
 		h2
 			= "Demo"
 
-		if connections && connections.google
-			p
-				= "Hello " + connections.google.displayName
-		else
-			div.google
-				button.login(onclick="login('google')")
-					= "Signin with Google"
+		each val, key in client_ids
+			if connections && connections[key]
+				p
+					= "Hello " + connections[key].displayName + " via " + key
+			else
+				div(class=key)
+					button.login(onclick="login('#{key}')")
+						= "Signin with " + key
 

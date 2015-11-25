@@ -1,13 +1,14 @@
 
 // Initiate the HelloJS
-hello.init({
-	google: '656984324806-sr0q9vq78tlna4hvhlmcgp2bs2ut8uj8.apps.googleusercontent.com'
-}, {
+hello.init(HELLO_CLIENT_IDS, {
 	// Define this as the registered callback address
 	redirect_uri: 'redirect',
 
 	// Set this to always relay requests via the server
-	response_type: 'code'
+	response_type: 'code',
+
+	// OAuth-Proxy
+	oauth_proxy: '/redirect'
 });
 
 
@@ -20,7 +21,7 @@ function login(network) {
 	hi.login()
 	.then(function() {
 		return hi.api('me');
-	})
+	}, loginFailed.bind(null, network))
 	.then(function(resp) {
 
 		// Create a profile image
@@ -46,4 +47,8 @@ function create(tag, attr) {
 	}
 
 	return d;
+}
+
+function loginFailed(network, message) {
+	console.log("Failed to login to " + network, message);
 }
