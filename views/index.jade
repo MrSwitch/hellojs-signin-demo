@@ -2,18 +2,27 @@ doctype html
 html
 	head
 		title
-			= "HelloJS federated signin example"
+			= "HelloJS federated signin demo"
 		script(src="//adodson.com/adorn/adorn.js", async)
 		script(src="//adodson.com/hello.js/dist/hello.all.js")
 		script(type='text/javascript').
 			var HELLO_CLIENT_IDS =!{JSON.stringify(client_ids)}
 		script(src="script.js")
+		link(rel="icon", href="//adodson.com/favicon.ico")
 		link(rel="stylesheet", href="//adodson.com/adorn/adorn.css")
 	body
-		include:markdown-it ../README.md
+		h1= "HelloJS signin demo"
+		blockquote
+			= "This is an example of "
+			a(href="https://adodson.com/hello.js")= "HelloJS"
+			= ", "
+			a(href="https://adodson.com/node-oauth-shim")= "oauth-shim"
+			= " and "
+			a(href="http://passportjs.org/")= "passport-* strategies"
+			= " for serverside user session management. See "
+			a(href="https://github.com/MrSwitch/hellojs-signin-demo")= "Source"
 
-		h2
-			= "Demo"
+		h2= "Demo"
 
 		each val, key in client_ids
 			if connections && connections[key]

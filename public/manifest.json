@@ -1,0 +1,12 @@
+{
+	"name" : "Andrew Dodson's web portfolio",
+	"icons" : {
+		"64" : "https://adodson.com/favicon.ico"
+	},
+	"favicon" : "https://adodson.com/favicon.ico",
+	"description" : "Andrew Dodson's portfolio",
+	"github" : "MrSwitch/hellojs-signin-demo",
+	"twitter:creator" : "@setData",
+	"author" : "Andrew Dodson, https://adodson.com",
+	"ga:tracking" : "UA-35317561-1"
+}

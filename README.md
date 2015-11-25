@@ -1,4 +1,4 @@
-# Hello Federated Login
+# HelloJS signin demo
 
 This demonstrates federated authentication with [HelloJS](https://adodson.com/hello.js) libary in the client and [oauth-shim](https://github.com/MrSwitch/node-oauth-shim) on a node webserver to expose the Access Token to a back end for use in Federated Authentication.
 
