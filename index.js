@@ -1,3 +1,5 @@
+'use strict';
+
 // Demonstation of integration
 var oauthshim = require('oauth-shim'),
 	express = require('express'),
@@ -25,24 +27,24 @@ oauthshim.init(creds);
 // Passport Profile
 // Configure PassportJS's Google service
 var strategies = {};
-creds.forEach(function(cred) {
+creds.forEach(cred => {
 
-	var network = cred.name;
-	var service = AuthServices[network];
+	let network = cred.name;
+	let service = AuthServices[network];
 
 	if (!service) {
 		throw "Could not find Auth Service for " + network;
 	}
 
-	var service_oauth_version = service[0];
-	var constructor = service[1];
+	let service_oauth_version = service[0];
+	let constructor = service[1];
 
 	if (service_oauth_version === 2) {
 		strategies[network] = new constructor({
 			clientID: cred.client_id,
 			clientSecret: cred.client_secret,
 			callbackURL: 'https://blank'
-		}, function() {
+		}, () => {
 			console.log(arguments);
 			done();
 		});
@@ -52,7 +54,7 @@ creds.forEach(function(cred) {
 			consumerKey: cred.client_id,
 			consumerSecret: cred.client_secret,
 			callbackURL: 'https://blank'
-		}, function() {
+		}, () => {
 			console.log(arguments);
 			done();
 		});
@@ -68,7 +70,7 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
 	if (!req.session) {
 		req.session = {};
 	}
@@ -93,12 +95,12 @@ app.use(express.static('public'));
 
 // Convert credentials into client_ids for HelloJS
 var client_ids = {};
-creds.forEach(function(cred) {
+creds.forEach(cred => {
 	client_ids[cred.name] = cred.client_id;
 });
 
 // Homepage
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
 
 	// Session currently
 	console.log(req.session);
@@ -128,7 +130,7 @@ app.all('/redirect',
 	oauthshim.redirect,
 
 	// Finally an HTML page is displayed including HelloJS, which saves the token, amongst other things...
-	function(req, res) {
+	(req, res) => {
 
 		// Redirect to a page which contains HelloJS clientside script
 		// To Store the credentials in the client
@@ -144,30 +146,26 @@ function captureAuthentication(req, res, next) {
 
 	if (req.oauthshim && req.oauthshim.data && req.oauthshim.redirect) {
 
-		var data = req.oauthshim.data;
-		var opts = req.oauthshim.options;
-		var redirect = req.oauthshim.redirect;
+		let data = req.oauthshim.data;
+		let opts = req.oauthshim.options;
+		let redirect = req.oauthshim.redirect;
 
 		// Was this an OAuth Login response and does it contain a new access_token?
 		if ("access_token" in data && !("path" in opts)) {
 
 			// Store this access_token
-			console.log("Session created", data.access_token.substr(0,8) + '...' );
-
-			// Data
-			console.log(data);
+			console.log("Session created", data.access_token.substr(0,8) + '...', data);
 
 			// What is the network name
-			var network = toJSON(data.state).network;
+			let network = toJSON(data.state).network;
 
 			// Is this an OAuth1 requesst
-			var a = data.access_token.split(/[\:\@]/);
+			let a = data.access_token.split(/[\:\@]/);
 
 			// Make request for a User Profile
 			if (a.length > 1) {
 
-				console.log(a);
-				console.log(network);
+				console.log(network, a);
 
 				data.oauth_token = a[0];
 				data.oauth_token_secret = a[1];
@@ -205,7 +203,7 @@ function setSession(req, network, err, resp) {
 	req.session.connections[network] = resp;
 
 	// Because the page has already returned, we'll explicitly call session.save();
-	req.session.save(function(err) {
+	req.session.save(err => {
 		// Print this user out to the console.
 		console.log(req.session);
 	});

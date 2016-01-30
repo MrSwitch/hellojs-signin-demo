@@ -8,11 +8,13 @@ The script binding this all together can be seen in [./index.js](./index.js) whi
 
 	git clone [this repository] [path]
 	cd [path]
-	# Install dependencies
 	npm install
-	bower install
 
-Create a `credentials.json` file. E.g...
+
+## Setup
+You'll need to go and register to get your application keys. ... i presume you are already familiar with that.
+
+Rewrite `credentials.js(on)` file. E.g...
 
 	[
 	   {
@@ -25,3 +27,4 @@ Create a `credentials.json` file. E.g...
 	   ...
 	]
 
+... or, use environment variables. I have composed a hidden `.env` file for myself, and i start my server thusly; `DOTENV=./.env PORT=80 node ./index.js`. See [credentials.js](./credentials.js) for the required env vars to define for this demo.

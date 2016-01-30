@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Andrew Dodson",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^1.2.0",
